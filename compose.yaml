@@ -1,0 +1,40 @@
+name: mysql-observatory
+services:
+  db:
+    image: mysql:9.7.2
+    environment:
+      MYSQL_DATABASE: observatory
+      MYSQL_USER: demo
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-local-demo-password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local-root-password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -u demo observatory -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      start_period: 30s
+    restart: unless-stopped
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-8097}:8080"
+    environment:
+      DB_HOST: db
+      DB_NAME: observatory
+      DB_USER: demo
+      DB_PASSWORD: ${MYSQL_PASSWORD:-local-demo-password}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    restart: unless-stopped
+volumes:
+  mysql_data:
