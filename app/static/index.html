@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f5f7fa"><title>MySQL Observatory · See what’s possible</title>
-<link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>
+<link rel="stylesheet" href="/styles.css"><script src="/views-ui.js" defer></script><script src="/app.js" defer></script>
 </head>
 <body>
 <aside class="sidebar">
@@ -17,6 +17,7 @@
   <button class="nav-item lab-nav" data-lab="documents"><span class="mini-number">01</span> JSON duality</button>
   <button class="nav-item lab-nav" data-lab="vectors"><span class="mini-number">02</span> Vector discovery</button>
   <button class="nav-item lab-nav" data-lab="optimizer"><span class="mini-number">03</span> Query optimizer</button>
+  <button class="nav-item lab-nav" data-lab="views"><span class="mini-number">04</span> View studio</button>
   <div class="side-note"><span class="tiny-orbit">◎</span><strong>A little curiosity.<br>A lot of possibility.</strong><p>Real queries. Real data.<br>One local playground.</p><a href="https://dev.mysql.com/doc/refman/9.7/en/" target="_blank" rel="noreferrer">MySQL documentation ↗</a></div>
   <div class="sidebar-footer"><span class="avatar">D</span><div>Local demo workspace<small>Docker Compose</small></div><span class="green-dot"></span></div>
 </aside>
@@ -26,11 +27,12 @@
   <div class="page-eyebrow"><span class="blue-line"></span> THE NEXT CHAPTER OF MYSQL <span class="release-badge">9.7 LTS</span></div>
   <section class="hero"><div><h1>Same database.<br><span>New possibilities.</span></h1><p>Go from database features to application experiences.<br>Explore what changes, from the interface to the query.</p><div class="hero-links"><button class="primary small" data-nav="guide">Take a guided tour <span>↗</span></button><button class="text-button" data-nav="architecture">Explore the stack <span>→</span></button></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><span class="orbit-node node-one">{ }</span><span class="orbit-node node-two">✧</span><span class="orbit-node node-three">↗</span><div class="database-art"><div class="db-top"></div><div class="db-line"></div><div class="db-line second"></div><span>MySQL</span></div><span class="art-label">RELATIONAL AT THE CORE.</span></div></section>
   <div class="status-strip"><div><span id="connection-dot" class="status-dot"></span><strong id="db-version">Connecting to MySQL…</strong><span class="status-caption" id="db-edition">Live database</span></div><div><strong id="customer-count">—</strong><span>customers</span></div><div><strong id="order-count">—</strong><span>orders</span></div><div><strong id="vector-count">—</strong><span>native vectors</span></div><button id="refresh" class="icon-button" aria-label="Refresh database status">⟳</button></div>
-  <section class="labs-heading"><div><h2>Your feature playground</h2><p>Pick a lab. Make a change. See what happens underneath.</p></div><span class="subtle-label">03 INTERACTIVE LABS</span></section>
+  <section class="labs-heading"><div><h2>Your feature playground</h2><p>Pick a lab. Make a change. See what happens underneath.</p></div><span class="subtle-label">04 INTERACTIVE LABS</span></section>
   <div class="lab-cards" role="tablist" aria-label="Feature labs">
     <button class="lab-card selected" data-lab="documents" role="tab" aria-selected="true"><div class="card-top"><span class="feature-icon blue">{ }</span><span class="feature-tag">NEW IN COMMUNITY · 9.7</span><span class="card-arrow">↗</span></div><h3>JSON duality</h3><p>Think in documents. Store in tables.</p><div class="card-bottom"><span>01 <span class="bottom-rule"></span> DOCUMENTS & RELATIONAL</span><span class="selected-dot"></span></div></button>
     <button class="lab-card" data-lab="vectors" role="tab" aria-selected="false"><div class="card-top"><span class="feature-icon purple">✧</span><span class="feature-tag">NATIVE TYPE · 9.0+</span><span class="card-arrow">↗</span></div><h3>Vector discovery</h3><p>Find a match beyond the keyword.</p><div class="card-bottom"><span>02 <span class="bottom-rule"></span> VECTOR STORAGE</span><span class="selected-dot"></span></div></button>
     <button class="lab-card" data-lab="optimizer" role="tab" aria-selected="false"><div class="card-top"><span class="feature-icon orange">↗</span><span class="feature-tag">NEW IN COMMUNITY · 9.7</span><span class="card-arrow">↗</span></div><h3>Query optimizer</h3><p>One query. Two ways to get there.</p><div class="card-bottom"><span>03 <span class="bottom-rule"></span> HYPERGRAPH OPTIMIZER</span><span class="selected-dot"></span></div></button>
+    <button class="lab-card" data-lab="views" role="tab" aria-selected="false"><div class="card-top"><span class="feature-icon teal">▤</span><span class="feature-tag">VIEWS → LIVE DATA</span><span class="card-arrow">↗</span></div><h3>View studio</h3><p>Choose a view. Create real data.</p><div class="card-bottom"><span>04 <span class="bottom-rule"></span> DYNAMIC INPUTS</span><span class="selected-dot"></span></div></button>
   </div>
   <section class="playground" aria-label="Interactive lab">
     <div class="playground-toolbar"><div><span class="live-dot"></span><strong id="lab-title">JSON duality lab</strong><span class="subtle-label">LIVE PLAYGROUND</span></div><div class="mode-toggle" id="mode-toggle" aria-label="Application approach"><button data-mode="classic">Before</button><button data-mode="modern" class="active">After <span>✦</span></button></div></div>

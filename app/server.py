@@ -4,34 +4,16 @@ import math
 import re
 import statistics
 import time
-from decimal import Decimal
 
 import pymysql
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
-from database import connect
+from database import connect, clean, query
+from views import views
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.config['MAX_CONTENT_LENGTH'] = 16384
-
-
-def clean(value):
-    if isinstance(value, Decimal):
-        return float(value)
-    if isinstance(value, dict):
-        return {k: clean(v) for k, v in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [clean(v) for v in value]
-    return value
-
-
-def query(cur, sql, params=(), trace=None):
-    start = time.perf_counter()
-    cur.execute(sql, params)
-    rows = cur.fetchall() if cur.description else []
-    if trace is not None:
-        trace.append({'sql': sql, 'params': list(params), 'ms': round((time.perf_counter()-start)*1000, 3)})
-    return clean(rows)
+app.register_blueprint(views)
 
 
 def document(cur, customer_id, mode, trace):
